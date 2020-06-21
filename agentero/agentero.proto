@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package agentero;
+
+service API {
+  // Returns a policy holder and its policies by userID
+  rpc GetContactAndPoliciesByID (RequestById) returns (ContactPoliciesReply) {}
+  // Returns a single policyholder and its policies by MobileNumber
+  rpc GetContactsAndPoliciesByMobileNumber (RequestByMobileNumber) returns (ContactPoliciesReply) {}
+}
+
+message RequestById {
+  int64 userId = 1;
+}
+
+message RequestByMobileNumber {
+  string mobileNumber = 1;
+}
+
+message Policy {
+  double Premium = 1;
+  string Type = 2;
+}
+
+message ContactPoliciesReply {
+  string Name = 1;
+  string MobileNumber = 2;
+  repeated Policy Policies = 3;
+}
